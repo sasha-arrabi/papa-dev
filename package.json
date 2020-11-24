@@ -1,0 +1,24 @@
+{
+  "name": "papa-dev",
+  "version": "1.0.0",
+  "description": "A place for my observations, musings, and technical experiments.",
+  "scripts": {
+    "generateImages": "node scripts/generate-images.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sasha-arrabi/papa-dev.git"
+  },
+  "author": "Sasha Arrabi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sasha-arrabi/papa-dev/issues"
+  },
+  "homepage": "https://github.com/sasha-arrabi/papa-dev#readme",
+  "dependencies": {
+    "@types/bootstrap": "^4.5.1",
+    "@types/jquery": "^3.5.4",
+    "@types/lunr": "^2.3.3",
+    "sharp": "^0.26.3"
+  }
+}

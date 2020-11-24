@@ -1,0 +1,72 @@
+---
+---
+<!-- Variables -->
+{% capture read_time %}{{ page.content | number_of_words | divided_by: 180 }}{% endcapture %}
+{% assign imgParts = page.image | split: "." %}
+{% assign imgFilename = imgParts[0] %}
+{% assign imgExt = imgParts[1] %}
+
+<!-- Begin post layout -->
+<!DOCTYPE html>
+<html lang="en-US">
+{% include head.html %}
+<body>
+  {% include nav.html %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        {% include search-results.html %}
+      </div>
+    </div>
+    <div class="row">
+      <div col-12>
+        <picture>
+          <source type="image/webp" srcset="{{ imgFilename }}-xs.webp 360w, {{ imgFilename }}-sm.webp 540w, {{ imgFilename }}-md.webp 720w, {{ imgFilename }}-lg.webp 1080w, {{ imgFilename }}-xl.webp 1200w" sizes="100vw">
+          <source srcset="{{ imgFilename }}-xs.{{ imgExt}} 360w, {{ imgFilename }}-sm.{{ imgExt }} 540w, {{ imgFilename }}-md.{{ imgExt }} 720w, {{ imgFilename }}-lg.{{ imgExt }} 1080w, {{ imgFilename }}-xl.{{ imgExt }} 1200w" sizes="100vw">
+          <img class="img-fluid" src="{{ page.image }}" alt="{{ page.image_alt | default: "Cover image" }}" width="{{ page.image_width }}" height="{{ page.image_height }}">
+        </picture>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-9">
+        <h2 class="display-3">{{ page.title }}</h2>
+        <p class="lead">{{ page.tagline }}</p>
+        <hr class="my-4">
+        <div class="row">
+          <div class="col">
+            <p class="text-muted">By <a href="/authors/{{ page.author_shortname | default: site.author_shortname }}">{{ page.author | default: site.author }}</a> on {{ page.date | date_to_string: "ordinal", "US" }}
+          </div>
+          <div class="col text-right">
+            <p class="text-muted">
+              {% if read_time == '0' %}1{% else %}{{ read_time }}{% endif %} min read</p></div>
+            </p>
+        </div>
+        {{ content }}
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Tags</h5>
+            <h6 class="card-subtitle mb-2 text-muted"></h6>
+          </div>
+        </div>
+        <br>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">About me</h5>
+            <h6 class="card-subtitle mb-2 text-muted"></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+
+        <hr class="my-4">
+        {% include breadcrumb.html %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

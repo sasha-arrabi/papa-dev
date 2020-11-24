@@ -1,0 +1,51 @@
+---
+# Global configuration
+title: Papa Dev
+tagline: Father, coder, foodie
+description: A place for my observations, musings, and technical experiments.
+author: Sasha Arrabi
+author_shortname: sasha-arrabi
+url: 'https://papadev.com'
+logo: /assets/images/logo.png
+locale: en_US
+tz: America/New_York
+encoding: utf-8
+source: src
+destination: dist
+exclude:
+  - _typescript
+twitter:
+  card: summary
+  username: sasha_arrabi
+social:
+  name: Sasha Arrabi
+  links:
+    - https://github.com/sasha-arrabi
+    - https://www.linkedin.com/in/alexanderarrabi
+    - https://www.twitter.com/sasha_arrabi
+# webmaster_verifications:
+#   bing: 1234
+#   alexa: 1234
+#   yandex: 1234
+#   baidu: 1234
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - classifier-reborn
+
+# Build command options
+show_drafts: false
+future: true
+unpublished: false
+incremental: false
+profile: true
+strict_front_matter: true
+lsi: true
+
+# Serve command options
+host: localhost
+port: 8080
+livereload: false
+open_url: true
+

@@ -1,0 +1,14 @@
+---
+---
+[{% for post in site.posts %}
+    {
+      "title": "{{ post.title | xml_escape }}",
+      "author": "{{ post.author | default: site.author | xml_escape }}",
+      "category": "{{ post.category | xml_escape }}",
+      "tags": "{{ post.tags | xml_escape | join: ', ' }}",
+      "date": "{{ post.date | xml_escape }}",
+      "excerpt": {{ post.excerpt | strip_html | strip_newlines | jsonify }},
+      "url": "{{ post.url }}",
+      "image": "{{ post.image }}"
+    }{% unless forloop.last %},{% endunless %}
+{% endfor %}]

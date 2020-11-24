@@ -1,0 +1,21 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en-US">
+  {% include head.html %}
+  <body>
+    {% include nav.html %}
+    <h1>Hello!</h1>
+    <h2>My name is <b>Sasha Arrabi</b>.</h2>
+    <br />
+    <p>Here are my blog posts:</p>
+    <ul>
+      {% for post in site.posts %}
+      <li>
+        <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        {{ post.excerpt }}
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -1,3 +1,8 @@
+function scrollToAnchor(id){
+  var aTag = $("#" + id);
+  $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+}
+
 function loadScript(path, async, noCache) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
@@ -61,7 +66,8 @@ function init() {
           // Enable all tooltips once JQuery and Bootstrap JS are loaded
           $('[data-toggle="tooltip"]').tooltip();
 
-          // Hide empty search results message
+          // Setup search for initial use
+          $('#searchPagination').hide();
           $('#noSearchResults').hide();
         });
       })

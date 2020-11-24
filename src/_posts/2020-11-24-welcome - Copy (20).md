@@ -1,5 +1,5 @@
 ---
-title: Welcome to my new blog!
+title: Welcome to my 22nd blog post!
 layout: post
 image: /assets/images/hello.jpg
 image_alt: Hello!

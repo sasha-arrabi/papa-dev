@@ -6,26 +6,51 @@
   <body>
     {% include nav.html %}
     <div class="container">
+      <div class="jumbotron bg-light">
+          <h1 class="display-4">Welcome!</h1>
+          <p class="lead">This is the grand opening of the Papa Dev blog. I don't know what I'm doing - let's have some fun!</p>
+          <hr class="my-4">
+          <a class="btn btn-primary btn-lg" href="/welcome" role="button">Read the welcome post</a>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <h3 class="text-center">Explore topics</h3>
+        </div>
+      </div>
       <div class="row">
-        <div class="col-4">
-          <div class="card mb-4 shadow-sm">
-
+        <div class="col-md-6">
+          <div class="row mb-4">
+            <div class="card shadow-sm">
+              <img src="/assets/images/father.jpg" class="img-fluid card-img-top" alt="...">
+              <div class="card-body">
+                <a class="stretched-link" href="/categories/father"><h5 class="card-title text-center">Father</h5></a>
+                <p class="card-text">Join me on my journey of exploring fatherhood while raising a rambunctious pair of twins.</p>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="card shadow-sm">
+              <img src="/assets/images/coder.jpg" class="img-fluid card-img-top" alt="...">
+              <div class="card-body">
+                <a class="stretched-link" href="/categories/coder"><h5 class="card-title text-center">Coder</h5></a>
+                <p class="card-text">Find tips and tricks, technical musings, experiments gone right, and everything in between when it comes to coding.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-4">
-          <div class="card mb-4 shadow-sm">
-
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="card mb-4 shadow-sm">
-
+        <div class="col-md-6 mb-4">
+          <div class="card shadow-sm">
+            <img src="/assets/images/foodie.jpg" class="img-fluid card-img-top" alt="...">
+            <div class="card-body">
+              <a class="stretched-link" href="/categories/foodie"><h5 class="card-title text-center">Foodie</h5></a>
+              <p class="card-text">Amateur reviews, home-cooked recipes <s>stolen</s> borrowed from relatives and friends, and planning for future food tourism.</p>
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-10 offset-md-1">
-          <h3>Recent blog posts:</h2>
+          <h3 class="text-center">Latest blog posts</h2>
         </div>
       </div>
       <br>
@@ -64,11 +89,23 @@
             </a>
             <div class="card-body">
               <h5 class="card-title">{{ post.title }}</h5>
-              <p class="text-muted">By <a href="/authors/{{ page.author_shortname | default: site.author_shortname }}">{{ page.author | default: site.author }}</a></p>
+              <div class="row">
+                <div class="col">
+                  <p class="text-muted">By <a href="/authors/{{ page.author_shortname | default: site.author_shortname }}">{{ page.author | default: site.author }}</a></p>
+                </div>
+                <div class="col">
+                  <p class="text-right text-muted">{% if read_time == '0' %}1{% else %}{{ read_time }}{% endif %} min read</p>
+                </div>
+              </div>
               {{ post.excerpt }}
-              <p class="card-text"><small class="text-muted">Published on {{ post.date | date_to_string: "ordinal", "US" }}</small></p>
-              <p class="text-right"><a class="btn btn-primary text-right" href="{{ post.url }}">Read full article</a></p>
-              <p class="text-right text-muted">{% if read_time == '0' %}1{% else %}{{ read_time }}{% endif %} min read</p>
+              <div class="row align-items-top">
+                <div class="col">
+                  <p class="card-text"><small class="text-muted">Published on {{ post.date | date_to_string: "ordinal", "US" }}</small></p>
+                </div>
+                <div class="col">
+                  <p class="text-right"><a class="btn btn-primary" href="{{ post.url }}">Read full article</a></p>
+                </div>
+              </div>
             </div>
           </div>
           {% endfor %}

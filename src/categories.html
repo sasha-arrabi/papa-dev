@@ -17,12 +17,15 @@ title: Categories
       {% assign sorted_categories = site.categories | sort %}
       {% for category in sorted_categories %}
         {% capture category_name %}{{ category | first }}{% endcapture %}
-        <div id="#{{ category_name | slugize }}">
-          <h3>{{ category_name | capitalize }}</h3>
-          {% for post in site.categories[category_name] %}
-            <h4><a href="{{ post.url }}">{{ post.title }}</a>({{ post.date | date_to_string: "ordinal", "US" }})</h4>
-          {% endfor %}
+        <div id="{{ category_name | slugize }}">
+          <h4>{{ category_name | capitalize }}</h4>
+          <ul>
+            {% for post in site.categories[category_name] %}
+              <li><a href="{{ post.url }}">{{ post.title }}</a>({{ post.date | date_to_string: "ordinal", "US" }})</li>
+            {% endfor %}
+          </ul>
         </div>
+        <br><br>
       {% endfor %}
       </div>
     </div>

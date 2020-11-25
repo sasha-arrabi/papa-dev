@@ -10,7 +10,7 @@ searchInput.on(events, debounce(350, () => performSearch()));
 
 function performSearch() {
   const searchQuery = searchInput.val();
-  if (searchQuery !== previousSearchQuery && searchQuery.length > 3) {
+  if (searchQuery !== previousSearchQuery && searchQuery.length > 2) {
     previousSearchQuery = searchQuery;
     if (!index) {
       searchBase.then((posts) => {
@@ -40,11 +40,11 @@ function performSearch() {
 }
 
 function displaySearchResults(results) {
-  $('#emptySearchQuery').hide(300);
+  $('#emptySearchQuery').hide();
   searchBase.then(posts => {
     if (results.length > 0) {
       $('#searchLinks').empty();
-      $('#noSearchResults').hide(300);
+      $('#noSearchResults').hide();
 
       const paginatedDivs = setupPagination(results);
       for (let i = 0; i < results.length; i++) {
@@ -112,14 +112,20 @@ function displaySearchResults(results) {
       // Display search results
       $('#searchLinks').show();
     } else {
-      $('#searchLinks').hide(300);
-      $('#searchPagination').hide(300);
-      $('#noSearchResults').show(300);
+      $('#searchLinks').hide();
+      $('#searchPagination').hide();
+      $('#noSearchResults').show();
     }
 
     $('#search-total').text(results.length === 1 ? '1 search result' : results.length + ' search results');
     $('#searchResults').collapse('show');
   });
+}
+
+function searchSubmit(event) {
+  event.preventDefault();
+  $('#searchResults').collapse('show');
+  return false;
 }
 
 function setupPagination(results) {
@@ -204,10 +210,10 @@ function clearSearchResults() {
   currentPage = 1;
   totalPages = 1;
   $('#search-total').text('Start a search');
-  $('#searchPagination').hide(300);
-  $('#searchLinks').hide(300);
-  $('#noSearchResults').hide(300);
-  $('#emptySearchQuery').show(300);
+  $('#searchPagination').hide();
+  $('#searchLinks').hide();
+  $('#noSearchResults').hide();
+  $('#emptySearchQuery').show();
 }
 
 function nextPage() {

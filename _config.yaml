@@ -1,7 +1,7 @@
 ---
 # Global configuration
 title: Papa Dev
-tagline: Father, coder, foodie
+tagline: Father, Coder, Foodie
 description: A place for my observations, musings, and technical experiments.
 author: Sasha Arrabi
 author_shortname: sasha-arrabi
@@ -12,6 +12,8 @@ tz: America/New_York
 encoding: utf-8
 source: src
 destination: dist
+paginate: 5
+paginate_path: "/blog/:num/"
 exclude:
   - _typescript
 twitter:
@@ -32,6 +34,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-paginate
   - classifier-reborn
 
 # Build command options

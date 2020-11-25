@@ -3,18 +3,18 @@
     <div class="card-header">
       <div class="row align-items-center">
         <div class="col">
-          <h5><span id="search-total">0</span> search result(s)</h5>
+          <h5 id="search-total">Start a search</h5>
         </div>
         <div class="col">
-          <button class="btn btn-danger float-right" type="button" data-toggle="collapse" data-target="#searchResults" aria-expanded="false" aria-controls="searchResults">
-            Close
+          <button class="close float-right" type="button" aria-label="Close" data-toggle="collapse" data-target="#searchResults" aria-expanded="false" aria-controls="searchResults">
+            <span aria-hidden="true">&times;</span>
           </button>
         </div>
       </div>
     </div>
     <div id="emptySearchQuery">
       <div class="card-body">
-        <p class="card-text">Enter a search term to find articles by title, tag, or category.</p>
+        <p class="card-text">Enter a search term to find articles by title, tag, category, or contents.</p>
       </div>
     </div>
     <div id="noSearchResults">

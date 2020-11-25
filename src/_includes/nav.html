@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light">
-  <div class="container">
+  <div class="container-lg">
     <a class="navbar-brand" href="/"><h1>Papa Dev</h1></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,11 +13,15 @@
         <li class="nav-item{% if page.url == "/about.html" %} active{% endif %}">
           <a class="nav-link" href="/about">About</a>
         </li>
+        <li class="nav-item{% if page.url == "/subscribe.html" %} active{% endif %}">
+          <a class="nav-link" href="/subscribe">Subscribe</a>
+        </li>
         <li class="nav-item{% if page.url == "/contact.html" %} active{% endif %}">
           <a class="nav-link" href="/contact">Contact</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-md-0">
+        <button type="submit" disabled style="display: none" aria-hidden="true"></button>
         <div class="input-group">
           <input id="search" type="text" class="form-control outline-danger" placeholder="Find articles..." aria-label="Find articles..." aria-describedby="search-button" onfocus="loadSearchScripts()">
           <div class="input-group-append">
@@ -28,3 +32,6 @@
     </div>
   </div>
 </nav>
+<div class="container">
+  {% include search-results.html %}
+</div>

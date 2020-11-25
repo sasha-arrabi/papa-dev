@@ -5,17 +5,88 @@
   {% include head.html %}
   <body>
     {% include nav.html %}
-    <h1>Hello!</h1>
-    <h2>My name is <b>Sasha Arrabi</b>.</h2>
-    <br />
-    <p>Here are my blog posts:</p>
-    <ul>
-      {% for post in site.posts %}
-      <li>
-        <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-        {{ post.excerpt }}
-      </li>
-      {% endfor %}
-    </ul>
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <div class="card mb-4 shadow-sm">
+
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card mb-4 shadow-sm">
+
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card mb-4 shadow-sm">
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <h3>Recent blog posts:</h2>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          {% for post in paginator.posts %}
+          <div class="card mb-4 shadow-sm">
+            {% capture read_time %}{{ post.content | number_of_words | divided_by: 180 }}{% endcapture %}
+            {% assign imgParts = post.image | split: "." %}
+            {% assign imgFilename = imgParts[0] %}
+            {% assign imgExt = imgParts[1] %}
+            <a href="{{ post.url }}">
+              <picture>
+                <source type="image/webp"
+                  srcset="{{ imgFilename }}-xl.webp 1200w,
+                    {{ imgFilename }}-lg.webp 1080w,
+                    {{ imgFilename }}-md.webp 720w,
+                    {{ imgFilename }}-sm.webp 540w,
+                    {{ imgFilename }}-xs.webp 360w"
+                  sizes="(min-width: 1200px) 918px,
+                    (min-width: 992px) 768px
+                    (min-width: 768px) 568px,
+                    (min-width: 576px) 508px, calc(100vw - 49px)">
+                <source
+                  srcset="{{ imgFilename }}-xl.{{ imgExt }} 1200w,
+                    {{ imgFilename }}-lg.{{ imgExt }} 1080w,
+                    {{ imgFilename }}-md.{{ imgExt }} 720w,
+                    {{ imgFilename }}-sm.{{ imgExt }} 540w,
+                    {{ imgFilename }}-xs.{{ imgExt}} 360w"
+                  sizes="(min-width: 1200px) 918px,
+                    (min-width: 992px) 768px
+                    (min-width: 768px) 568px,
+                    (min-width: 576px) 508px, calc(100vw - 49px)">
+                <img class="img-fluid card-img-top" src="{{ post.image }}" alt="{{ post.image_alt | default: post.title }}" width="{{ post.image_width }}" height="{{ post.image_height }}">
+              </picture>
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="text-muted">By <a href="/authors/{{ page.author_shortname | default: site.author_shortname }}">{{ page.author | default: site.author }}</a></p>
+              {{ post.excerpt }}
+              <p class="card-text"><small class="text-muted">Published on {{ post.date | date_to_string: "ordinal", "US" }}</small></p>
+              <p class="text-right"><a class="btn btn-primary text-right" href="{{ post.url }}">Read full article</a></p>
+              <p class="text-right text-muted">{% if read_time == '0' %}1{% else %}{{ read_time }}{% endif %} min read</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- Pagination links -->
+      {% if paginator.total_pages > 1 %}
+      <br>
+      <nav aria-label="Pagination for blog posts">
+        <ul class="pagination justify-content-center">
+          <li class="page-item {% if paginator.previous_page == nil %}disabled{% endif %}"><a class="page-link" href="{{ paginator.previous_page_path | default: "/" }}" tabindex="-1">Previous</a></li>
+          {% for pi in (1..paginator.total_pages) %}
+          <li class="page-item {% if paginator.page == pi %}active{% endif %}"><a class="page-link" href="{% if pi == 1 %}/{% else %}/blog/{{ pi }}{% endif %}">{{ pi }}</a></li>
+          {% endfor %}
+          <li class="page-item {% if paginator.next_page == nil %}disabled{% endif %}"><a class="page-link" href="{{ paginator.next_page_path | default: "/" }}">Next</a></li>
+        </ul>
+      </nav>
+      {% endif %}
+    </div>
   </body>
 </html>

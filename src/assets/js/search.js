@@ -4,10 +4,14 @@ const events = 'input keydown keypress keyup paste';
 let index = null;
 let currentPage = 1;
 let totalPages = 1;
+let previousSearchQuery = null;
 
-searchInput.on(events, debounce(350, () => {
+searchInput.on(events, debounce(350, () => performSearch()));
+
+function performSearch() {
   const searchQuery = searchInput.val();
-  if (searchQuery.length > 3) {
+  if (searchQuery !== previousSearchQuery && searchQuery.length > 3) {
+    previousSearchQuery = searchQuery;
     if (!index) {
       searchBase.then((posts) => {
         index = lunr(function builder() {
@@ -30,9 +34,10 @@ searchInput.on(events, debounce(350, () => {
       displaySearchResults(index.search(searchQuery));
     }
   } else if (searchQuery.length === 0) {
+    previousSearchQuery = null;
     clearSearchResults();
   }
-}));
+}
 
 function displaySearchResults(results) {
   $('#emptySearchQuery').hide();
@@ -47,7 +52,7 @@ function displaySearchResults(results) {
 
         // Create individual elements
         const card = document.createElement('div');
-        card.className = "card-body mb-5";
+        card.className = "card-body d-inline-block";
 
         const cardTitle = document.createElement('h5');
         cardTitle.className = "card-title";
@@ -108,10 +113,11 @@ function displaySearchResults(results) {
       $('#searchLinks').show();
     } else {
       $('#searchLinks').hide();
+      $('#searchPagination').hide();
       $('#noSearchResults').show();
     }
 
-    $('#search-total').text(results.length);
+    $('#search-total').text(results.length === 1 ? '1 search result' : results.length + ' search results');
     $('#searchResults').collapse('show');
   });
 }
@@ -197,8 +203,7 @@ function setupPagination(results) {
 function clearSearchResults() {
   currentPage = 1;
   totalPages = 1;
-  $('#searchResults').collapse('hide');
-  $('#search-total').text(0);
+  $('#search-total').text('Start a search');
   $('#searchPagination').hide();
   $('#searchLinks').hide();
   $('#noSearchResults').hide();

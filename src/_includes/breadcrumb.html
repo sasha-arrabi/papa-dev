@@ -2,7 +2,7 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     {% for category in page.categories %}
-    <li class="breadcrumb-item"><a href="/categories/{{ category }}">{{ category }}</a></li>
+    <li class="breadcrumb-item"><a href="/categories#{{ category }}">{{ category }}</a></li>
     {% endfor %}
     <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
   </ol>

@@ -10,76 +10,31 @@ readdirSync(directory).forEach(file => {
   // Only convert the source if it hasn't already been converted before
   if (!existsSync(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-xs${extension}`)) {
     // Create webp versions for all sizes
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(360)
-        .toFormat('webp')
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-xs.webp`)
-    );
-
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(540)
-        .toFormat('webp')
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-sm.webp`)
-    );
-
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(720)
-        .toFormat('webp')
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-md.webp`)
-    );
-
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(1080)
-        .toFormat('webp')
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-lg.webp`)
-    );
-
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(1200)
-        .toFormat('webp')
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-xl.webp`)
-    );
+    promises.push(processSharp(directory, destinationDir, file, 200, 'xxxs', 'webp'));
+    promises.push(processSharp(directory, destinationDir, file, 325, 'xxs', 'webp'));
+    promises.push(processSharp(directory, destinationDir, file, 450, 'xs', 'webp'));
+    promises.push(processSharp(directory, destinationDir, file, 575, 'sm', 'webp'));
+    promises.push(processSharp(directory, destinationDir, file, 700, 'md', 'webp'));
+    promises.push(processSharp(directory, destinationDir, file, 825, 'lg', 'webp'));
+    promises.push(processSharp(directory, destinationDir, file, 950, 'xl', 'webp'));
+    promises.push(processSharp(directory, destinationDir, file, 1080, 'xxl', 'webp'));
+    promises.push(processSharp(directory, destinationDir, file, 1200, 'xxxl', 'webp'));
 
     // Resize original image with all sizes
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(360)
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-xs${extension}`)
-    );
-
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(540)
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-sm${extension}`)
-    );
-
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(720)
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-md${extension}`)
-    );
-
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(1080)
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-lg${extension}`)
-    );
-
-    promises.push(
-      sharp(`${directory}/${file}`)
-        .resize(1200)
-        .toFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-xl${extension}`)
-    );
-
-    // Create default image in medium size
-    copyFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-md${extension}`, `${destinationDir}/${file}`, () => true);
+    promises.push(processSharp(directory, destinationDir, file, 200, 'xxxs'));
+    promises.push(processSharp(directory, destinationDir, file, 325, 'xxs'));
+    promises.push(processSharp(directory, destinationDir, file, 450, 'xs'));
+    promises.push(processSharp(directory, destinationDir, file, 575, 'sm'));
+    promises.push(processSharp(directory, destinationDir, file, 700, 'md'));
+    promises.push(processSharp(directory, destinationDir, file, 825, 'lg'));
+    promises.push(processSharp(directory, destinationDir, file, 950, 'xl'));
+    promises.push(processSharp(directory, destinationDir, file, 1080, 'xxl'));
+    promises.push(processSharp(directory, destinationDir, file, 1200, 'xxxl'));
 
     Promise.all(promises).then(() => {
+      // Create default image in medium size
+      const extension = file.substring(file.lastIndexOf('.') + 1);
+      copyFile(`${destinationDir}/${file.substring(0, file.lastIndexOf('.'))}-md.${extension}`, `${destinationDir}/${file}`, () => true);
       console.log(`${file} has been processed successfully.`);
     }).catch(error => {
       console.error(`Error occurred while processing ${file}`, error);
@@ -88,3 +43,14 @@ readdirSync(directory).forEach(file => {
     console.log(`${file} has already been processed - skipping file.`);
   }
 });
+
+function processSharp(sourceDirectory, destinationDirectory, filename, size, sizeName, format) {
+  const extension = filename.substring(filename.lastIndexOf('.') + 1);
+  const image = sharp(`${sourceDirectory}/${filename}`).resize(size);
+
+  if (format) {
+    image.toFormat(format);
+  }
+
+  return image.toFile(`${destinationDirectory}/${filename.substring(0, filename.lastIndexOf('.'))}-${sizeName}.${format || extension}`);
+}

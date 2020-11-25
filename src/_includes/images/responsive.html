@@ -1,0 +1,28 @@
+{% assign imgParts = include.image | split: "." %}
+{% assign imgFilename = imgParts[0] %}
+{% assign imgExt = imgParts[1] %}
+<picture>
+  <source type="image/webp"
+    srcset="{{ imgFilename }}-xxxl.webp 1200w,
+      {{ imgFilename }}-xxl.webp 1080w,
+      {{ imgFilename }}-xl.webp 950w,
+      {{ imgFilename }}-lg.webp 825w,
+      {{ imgFilename }}-md.webp 700w,
+      {{ imgFilename }}-sm.webp 575w,
+      {{ imgFilename }}-xs.webp 450w,
+      {{ imgFilename }}-xxs.webp 325w,
+      {{ imgFilename }}-xxxs.webp 200w"
+    sizes="{% include {{include.sizes}} %}">
+  <source
+    srcset="{{ imgFilename }}-xxxl.webp 1200w,
+      {{ imgFilename }}-xxl.{{ imgExt }} 1080w,
+      {{ imgFilename }}-xl.{{ imgExt }} 950w,
+      {{ imgFilename }}-lg.{{ imgExt }} 825w,
+      {{ imgFilename }}-md.{{ imgExt }} 700w,
+      {{ imgFilename }}-sm.{{ imgExt }} 575w,
+      {{ imgFilename }}-xs.{{ imgExt }} 450w,
+      {{ imgFilename }}-xxs.{{ imgExt }} 325w,
+      {{ imgFilename }}-xxxs.{{ imgExt }} 200w"
+    sizes="{% include {{ include.sizes }} %}">
+  <img class="{{ include.class | default: "img-fluid" }}" src="{{ include.image }}" alt="{{ include.image_alt }}" width="{{ include.image_width }}" height="{{ include.image_height }}">
+</picture>

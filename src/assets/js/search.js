@@ -40,11 +40,11 @@ function performSearch() {
 }
 
 function displaySearchResults(results) {
-  $('#emptySearchQuery').hide();
+  $('#emptySearchQuery').hide(300);
   searchBase.then(posts => {
     if (results.length > 0) {
       $('#searchLinks').empty();
-      $('#noSearchResults').hide();
+      $('#noSearchResults').hide(300);
 
       const paginatedDivs = setupPagination(results);
       for (let i = 0; i < results.length; i++) {
@@ -66,17 +66,17 @@ function displaySearchResults(results) {
         imageFile = imageFile.split('.');
         const webpSource = document.createElement('source');
         webpSource.type = 'image/webp';
-        webpSource.srcset = imageFile[0] + '-xs.webp 360w';
+        webpSource.srcset = imageFile[0] + '-xxxs.webp 200w';
         webpSource.sizes = '100px';
         const origSource = document.createElement('source');
-        origSource.srcset = imageFile[0] + '-xs.' + imageFile[1] + ' 360w';
+        origSource.srcset = imageFile[0] + '-xxxs.' + imageFile[1] + ' 200w';
         origSource.sizes = '100px';
         const img = document.createElement('img');
         img.className = 'img-fluid img-thumbnail search-thumb float-left mr-3';
-        img.src = imageFile[0] + '-xs.' + imageFile[1];
+        img.src = imageFile[0] + '-xxxs.' + imageFile[1];
         img.alt = posts[+result.ref].title;
-        img.width = 100;
-        img.height = 100;
+        img.width = '100px';
+        img.height = '100px';
 
         const postExcerpt = document.createElement('p');
         postExcerpt.className = "card-text";
@@ -112,9 +112,9 @@ function displaySearchResults(results) {
       // Display search results
       $('#searchLinks').show();
     } else {
-      $('#searchLinks').hide();
-      $('#searchPagination').hide();
-      $('#noSearchResults').show();
+      $('#searchLinks').hide(300);
+      $('#searchPagination').hide(300);
+      $('#noSearchResults').show(300);
     }
 
     $('#search-total').text(results.length === 1 ? '1 search result' : results.length + ' search results');
@@ -204,10 +204,10 @@ function clearSearchResults() {
   currentPage = 1;
   totalPages = 1;
   $('#search-total').text('Start a search');
-  $('#searchPagination').hide();
-  $('#searchLinks').hide();
-  $('#noSearchResults').hide();
-  $('#emptySearchQuery').show();
+  $('#searchPagination').hide(300);
+  $('#searchLinks').hide(300);
+  $('#noSearchResults').hide(300);
+  $('#emptySearchQuery').show(300);
 }
 
 function nextPage() {
@@ -224,12 +224,12 @@ function previousPage() {
 
 function goToPage(page) {
   // Disable currently active page
-  $('#paginated-' + currentPage).hide();
+  $('#paginated-' + currentPage).hide(300);
   $('#pagination-link-' + currentPage).removeClass('active');
 
   // Show requested page
   currentPage = page;
-  $('#paginated-' + currentPage).show();
+  $('#paginated-' + currentPage).show(300);
   $('#pagination-link-' + currentPage).addClass('active');
 
   setPaginationIncrementers();

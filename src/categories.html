@@ -6,5 +6,26 @@ title: Categories
 {% include head.html %}
 <body>
   {% include nav.html %}
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-12">
+        <h3 class="text-center">Categories</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+      {% assign sorted_categories = site.categories | sort %}
+      {% for category in sorted_categories %}
+        {% capture category_name %}{{ category | first }}{% endcapture %}
+        <div id="#{{ category_name | slugize }}">
+          <h3>{{ category_name | capitalize }}</h3>
+          {% for post in site.categories[category_name] %}
+            <h4><a href="{{ post.url }}">{{ post.title }}</a>({{ post.date | date_to_string: "ordinal", "US" }})</h4>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
 </body>
 </html>

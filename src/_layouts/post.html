@@ -15,29 +15,8 @@
   <div class="container">
     <div class="row">
       <div col-12>
-        <picture>
-          <source type="image/webp"
-            srcset="{{ imgFilename }}-xl.webp 1200w,
-              {{ imgFilename }}-lg.webp 1080w,
-              {{ imgFilename }}-md.webp 720w,
-              {{ imgFilename }}-sm.webp 540w,
-              {{ imgFilename }}-xs.webp 360w"
-            sizes="(min-width: 1200px) 1140px,
-              (min-width: 992px) 960px
-              (min-width: 768px) 720px,
-              (min-width: 576px) 540px, 100vw">
-          <source
-            srcset="{{ imgFilename }}-xl.{{ imgExt }} 1200w,
-              {{ imgFilename }}-lg.{{ imgExt }} 1080w,
-              {{ imgFilename }}-md.{{ imgExt }} 720w,
-              {{ imgFilename }}-sm.{{ imgExt }} 540w,
-              {{ imgFilename }}-xs.{{ imgExt}} 360w"
-            sizes="(min-width: 1200px) 1140px,
-              (min-width: 992px) 960px
-              (min-width: 768px) 720px,
-              (min-width: 576px) 540px, 100vw">
-          <img class="img-fluid" src="{{ page.image }}" alt="{{ page.image_alt | default: page.title }}" width="{{ page.image_width }}" height="{{ page.image_height }}">
-        </picture>
+        {% assign imageHeight = page.image_height | times: 1140 | divided_by: page.image_width | append: 'px' %}
+        {% include images/responsive.html class="img-fluid" image=page.image image_alt=page.image_alt image_width="1140px" image_height=imageHeight sizes="images/col-12-sizes.html" %}
       </div>
     </div>
     <br>
@@ -66,9 +45,9 @@
       </div>
       <div class="col-lg-3">
         <div class="row text-center no-gutters">
-          <div class="col-4">{% include rss.html %}</div>
-          <div class="col-4">{% include github.html %}</div>
-          <div class="col-4">{% include twitter.html %}</div>
+          <div class="col-4">{% include icons/rss.html %}</div>
+          <div class="col-4">{% include icons/github.html %}</div>
+          <div class="col-4">{% include icons/twitter.html %}</div>
         </div>
         <hr>
         <span><h6 class='d-inline-block'>Tags: </h6>

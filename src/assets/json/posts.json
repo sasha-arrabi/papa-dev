@@ -4,9 +4,9 @@
     {
       "title": "{{ post.title | xml_escape }}",
       "author": "{{ post.author | default: site.author | xml_escape }}",
-      "category": "{{ post.category | xml_escape }}",
-      "tags": "{{ post.tags | xml_escape | join: ', ' }}",
-      "date": "{{ post.date | xml_escape }}",
+      "categories": "{{ post.categories | join: ', ' }}",
+      "tags": "{{ post.tags | join: ', ' }}",
+      "date": "{{ post.date }}",
       "excerpt": {{ post.excerpt | strip_html | strip_newlines | jsonify }},
       "url": "{{ post.url }}",
       "image": "{{ post.image }}"

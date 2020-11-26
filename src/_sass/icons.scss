@@ -1,0 +1,19 @@
+.svg-icon {
+  svg {
+    height: 36px;
+    width: 36px;
+    transition: fill .1s ease-in-out;
+  }
+
+  .github:hover {
+    fill: #8f2dc7;
+  }
+
+  .twitter:hover {
+    fill: #1DA1F2;
+  }
+
+  .rss:hover {
+    fill: #ff9500;
+  }
+}

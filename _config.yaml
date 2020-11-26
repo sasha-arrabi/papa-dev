@@ -42,8 +42,9 @@ plugins:
   - jekyll-minifier
   - classifier-reborn
 jekyll-minifier:
-  remove_intertag_spaces: true
+  exclude: 'feed.xml'
   compress_css: false
+  remove_spaces_inside_tags: false
   uglifier_args:
     harmony: true
 

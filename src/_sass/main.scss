@@ -24,31 +24,7 @@
 @import "bootstrap/pagination";
 @import "bootstrap/tooltip";
 @import "bootstrap/transitions";
-@import "bootstrap/card";
 
 /* Additional styles */
-.search-thumb {
-  object-fit: cover;
-  width: 100px;
-  height: 100px;
-}
-
-.svg-icon {
-  svg {
-    height: 36px;
-    width: 36px;
-    transition: fill .1s ease-in-out;
-  }
-
-  .github:hover {
-    fill: #8f2dc7;
-  }
-
-  .twitter:hover {
-    fill: #1DA1F2;
-  }
-
-  .rss:hover {
-    fill: #ffb347;
-  }
-}
+@import "icons";
+@import "search";

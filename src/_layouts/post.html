@@ -52,13 +52,13 @@
         <hr>
         <span><h6 class='d-inline-block'>Tags: </h6>
           {% for tag in page.tags %}
-          <span class="badge badge-pill badge-danger">{{ tag }}</span>
+          <a class="badge badge-pill badge-emphasis" href="/tags#{{ tag | slugify }}">{{ tag }}</a>
           {% endfor %}
         </span>
         <br><hr>
         <span><h6 class='d-inline-block'>Categories: </h6>
           {% for category in page.categories %}
-          <span class="badge badge-pill badge-primary">{{ category }}</span>
+          <a class="badge badge-pill badge-primary" href="/categories#{{ category | slugify }}">{{ category }}</a>
           {% endfor %}
         </span>
         <br><hr>

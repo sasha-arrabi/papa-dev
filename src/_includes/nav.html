@@ -1,6 +1,12 @@
-<nav class="navbar navbar-expand-md navbar-light">
-  <div class="container-lg">
-    <a class="navbar-brand" href="/"><h1>Papa Dev</h1></a>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+    <picture>
+      <source type="image/webp" srcset="/assets/images/menu-logo-xxxs.webp 200w" sizes="200px">
+      <source srcset="/assets/images/menu-logo-xxxs.png 200w" sizes="200px">
+      <img src="/assets/images/menu-logo-xxxs.png" alt="Papa Dev" width="200px" height="54px">
+    </picture>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,9 +28,9 @@
       </ul>
       <form class="form-inline my-2 my-md-0" onsubmit="return searchSubmit(event)">
         <div class="input-group">
-          <input id="search" type="text" class="form-control outline-danger" placeholder="Find articles..." aria-label="Find articles..." aria-describedby="search-button" onfocus="loadSearchScripts()">
+          <input id="search" type="text" class="form-control" placeholder="Find articles..." aria-label="Find articles..." aria-describedby="search-button" onfocus="loadSearchScripts()">
           <div class="input-group-append">
-            <button id="search-button" class="btn btn-danger" type="button" data-toggle="collapse" data-target="#searchResults" aria-expanded="false" aria-controls="searchResults">Search</button>
+            <button id="search-button" class="btn btn-light" type="button" data-toggle="collapse" data-target="#searchResults" aria-expanded="false" aria-controls="searchResults">Search</button>
           </div>
         </div>
       </form>

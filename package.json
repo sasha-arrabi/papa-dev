@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A place for my observations, musings, and technical experiments.",
   "scripts": {
+    "start": "bundle exec jekyll serve --incremental",
+    "test": "cross-env JEKYLL_ENV=production npm run start",
+    "build": "bundle exec jekyll build",
     "generateImages": "node scripts/generate-images.js"
   },
   "repository": {
@@ -19,6 +22,7 @@
     "@types/bootstrap": "^4.5.1",
     "@types/jquery": "^3.5.4",
     "@types/lunr": "^2.3.3",
+    "cross-env": "^7.0.2",
     "sharp": "^0.26.3"
   }
 }

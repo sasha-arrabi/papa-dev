@@ -15,7 +15,7 @@ destination: dist
 paginate: 5
 paginate_path: "/blog/:num/"
 exclude:
-  - _typescript
+  - assets/js/_js
 twitter:
   card: summary
   username: sasha_arrabi
@@ -30,12 +30,22 @@ social:
 #   alexa: 1234
 #   yandex: 1234
 #   baidu: 1234
+sass:
+  sass_dir: _sass
+  style: compressed
 plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-paginate
+  - jekyll-autoprefixer
+  - jekyll-minifier
   - classifier-reborn
+jekyll-minifier:
+  remove_intertag_spaces: true
+  compress_css: false
+  uglifier_args:
+    harmony: true
 
 # Build command options
 show_drafts: false

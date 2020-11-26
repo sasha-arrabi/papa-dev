@@ -1,3 +1,4 @@
+/** Search-specific global variables */
 const searchInput = $('#search')
 const events = 'input keydown keypress keyup paste';
 /** @type { import('lunr').Index } */
@@ -5,8 +6,6 @@ let index = null;
 let currentPage = 1;
 let totalPages = 1;
 let previousSearchQuery = null;
-
-searchInput.on(events, debounce(350, () => performSearch()));
 
 function performSearch() {
   const searchQuery = searchInput.val();
@@ -256,3 +255,5 @@ function setPaginationIncrementers() {
     $('#paginationNext').removeClass('disabled');
   }
 }
+
+searchInput.on(events, debounce(350, () => performSearch()));

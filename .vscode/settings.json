@@ -3,6 +3,7 @@
     "**/dist": true,
     "**/.vscode": false,
     "**/node_modules": true,
-    "**/src/assets/images": true
+    "**/src/assets/images": true,
+    "**/.jekyll*": true
   }
 }

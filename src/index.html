@@ -6,6 +6,7 @@
   <body>
     {% include nav.html %}
     <div class="container">
+      {% if paginator.page == 1 %}
       <div class="jumbotron bg-light mb-5">
           <h1 class="display-4">Welcome!</h1>
           <p class="lead">This is the grand opening of the Papa Dev blog. I don't know what I'm doing - let's have some fun!</p>
@@ -52,6 +53,7 @@
           </div>
         </div>
       </div>
+      {% endif %}
       <div class="row">
         <div class="col-md-10 offset-md-1">
           <h3 class="text-center">Latest blog posts</h2>
